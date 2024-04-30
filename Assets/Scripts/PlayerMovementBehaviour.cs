@@ -6,6 +6,7 @@ public class PlayerMovementBehaviour : MonoBehaviour
     public float JumpForce;
     public Rigidbody2D Rigidbody;
     public SpriteRenderer SpriteRenderer;
+    public Animator Animator;
 
     public Transform RaycastOriginDown;
     public Transform RaycastOriginDownLeft;
@@ -22,6 +23,8 @@ public class PlayerMovementBehaviour : MonoBehaviour
     public LayerMask GroundMask;
     public float RaycastDistance;
 
+    private bool _isGrounded;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,11 @@ public class PlayerMovementBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastHit2D hit = Physics2D.Raycast(RaycastOriginDown.position, Vector2.down, RaycastDistance, GroundMask);
+        RaycastHit2D hitL = Physics2D.Raycast(RaycastOriginDownLeft.position, Vector2.down, RaycastDistance, GroundMask);
+        RaycastHit2D hitR = Physics2D.Raycast(RaycastOriginDownRight.position, Vector2.down, RaycastDistance, GroundMask);
+        _isGrounded = hit.collider != null || hitL.collider != null || hitR.collider != null;
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
             SpriteRenderer.flipX = false;
@@ -51,15 +59,14 @@ public class PlayerMovementBehaviour : MonoBehaviour
         else
             Rigidbody.velocity = new Vector2(0, Rigidbody.velocity.y);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
-            RaycastHit2D hit = Physics2D.Raycast(RaycastOriginDown.position, Vector2.down, RaycastDistance, GroundMask);
-            RaycastHit2D hitL = Physics2D.Raycast(RaycastOriginDownLeft.position, Vector2.down, RaycastDistance, GroundMask);
-            RaycastHit2D hitR = Physics2D.Raycast(RaycastOriginDownRight.position, Vector2.down, RaycastDistance, GroundMask);
-            if (hit.collider != null || hitL.collider != null || hitR.collider != null)
-            {
-                Rigidbody.AddForce(Vector2.up * JumpForce);
-            }
+            Rigidbody.AddForce(Vector2.up * JumpForce);
+            Animator.SetTrigger("Jump");
         }
+
+        Animator.SetBool("IsGrounded", _isGrounded);
+        Animator.SetFloat("velocityX", Mathf.Abs(Rigidbody.velocity.x));
+        Animator.SetFloat("velocityY", Rigidbody.velocity.y);
     }
 }
