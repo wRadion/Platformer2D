@@ -13,6 +13,11 @@ public class PlayerBehaviour : MonoBehaviour
     private float _alpha = 1f;
     private SpriteRenderer _sprite;
 
+    private void Awake()
+    {
+        GameManager.Instance.Player = gameObject;
+    }
+
     void Start()
     {
         _sprite = GetComponent<SpriteRenderer>();

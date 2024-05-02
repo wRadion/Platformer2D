@@ -6,6 +6,11 @@ public class FruitBehaviour : MonoBehaviour
     public FruitData Data;
     public GameObject CollectedPrefab;
 
+    private void Start()
+    {
+        GameManager.Instance.RegisterFruit(this);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
