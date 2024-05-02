@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 
     public TMP_Text FruitText;
 
-    private int _fruitCount = 0;
+    private int _score = 0;
 
     private void Awake()
     {
@@ -21,8 +21,9 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    public void AddFruit()
+    public void AddScore(int score)
     {
-        FruitText.text = $"Fruits: {++_fruitCount}";
+        _score += score;
+        FruitText.text = $"Score: {_score}";
     }
 }

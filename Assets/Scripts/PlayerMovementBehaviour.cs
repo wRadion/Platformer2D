@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovementBehaviour : MonoBehaviour
@@ -24,6 +26,7 @@ public class PlayerMovementBehaviour : MonoBehaviour
     public float RaycastDistance;
 
     private bool _isGrounded;
+    private float _timer = 0;
 
     // Start is called before the first frame update
     void Start()

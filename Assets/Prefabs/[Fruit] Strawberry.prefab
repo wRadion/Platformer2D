@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: '[Fruit] Strawberry'
       objectReference: {fileID: 0}
+    - target: {fileID: 8065974170906520699, guid: 8942f96c12f1bd545b14b6b8219cb376, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: b686f287db43a794a8a23e1ef97c9e28, type: 2}
+    - target: {fileID: 8065974170906520699, guid: 8942f96c12f1bd545b14b6b8219cb376, type: 3}
+      propertyPath: Score
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
