@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public GameObject Player;
     public TMP_Text FruitText;
 
     private int _score = 0;
