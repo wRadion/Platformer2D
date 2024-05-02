@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+    public int Damage;
     public float RunSpeed;
     public float WalkSpeed;
     public float Knockback;
@@ -59,6 +60,9 @@ public class EnemyBehaviour : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
+        {
             collision.collider.GetComponent<Rigidbody2D>().AddForce((collision.GetContact(0).normal * -Knockback) + Vector2.up * KnockbackUp);
+            GameManager.Instance.TakeDamage(Damage);
+        }
     }
 }
